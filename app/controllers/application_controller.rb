@@ -10,7 +10,21 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    erb :index
+    if logged_in?
+      redirect to "/posts/posts"
+    else
+      erb :index
+    end
   end
 
+  helpers do 
+    def logged_in?
+      !!current_user
+    end
+    
+    def current_user
+      @current_user ||= Student.find_by(id: session[:user_id]) if session[:user_id]
+    end 
+
+  end
 end

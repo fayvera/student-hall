@@ -1,0 +1,13 @@
+<h1><%= @student.first_name %> <%= @student.last_name %></h1>
+
+<h3>Here are <%= @student.first_name %>'s resourses:</h3>
+    <ul>
+        <% @student.posts.each do |post| %>
+            <h4><%= post.title %></h4>
+            <%= post.content %>
+            <% end %>
+    </ul>
+
+    <a href="/posts/new">Create a Post</a> <br></br>
+
+    <a href="/posts">Homepage</a>

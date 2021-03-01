@@ -1,8 +1,8 @@
 
   default: &default
   adapter: 'sqlite3'
-  database: 'db/development.sqlite'
+  database: 'db/student_hall.db'
 
 development:
   <<: *default
-  database: 'db/study_hall.db'
+  database: 'db/student_hall.db'
