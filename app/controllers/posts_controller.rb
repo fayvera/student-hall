@@ -37,6 +37,7 @@ class PostsController < ApplicationController
         if logged_in?
             @post = Post.find_by_id(params[:id])
             @author = Student.find_by(:id => @post.student_id)
+            @course = Course.find_by(:id => @post.course_id)
             erb :"/posts/show_post"
         else 
             redirect to '/login'

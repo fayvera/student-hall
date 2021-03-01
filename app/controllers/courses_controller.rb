@@ -9,8 +9,11 @@ class CoursesController < ApplicationController
     end
 
     get '/courses/:slug' do 
+        binding.pry
         if logged_in?
             @course = Course.find_by_slug(params[:slug])
+            @posts = Post.find_by(:course_id => @course.id)
+            @posts.each{ |post| @author = Student.find_by(:id => post.student_id)}
             erb :"/courses/course_show"
         else
             redirect to '/login'

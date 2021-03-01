@@ -23,7 +23,7 @@
         <a href="/courses">All Courses</a>
     <ul>
         <% @courses.each do |course| %>
-        <li><a href="/courses/<%= course.id %>"><%= course.name %></a></li>
+        <li><a href="/courses/<%= course.slug %>"><%= course.name %></a></li>
         <% end %>
     </ul>
 

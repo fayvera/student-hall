@@ -3,3 +3,12 @@
 <h3><%= @course.description %></h3>
 
 # <a href="/posts/new">Create a Post</a>
+
+<ul>    
+    <% @posts.each do |post| %>
+    <li><%= post.title %></li>
+        By: <strong><%= @author.first_name %> <%= @author.last_name %></strong>
+        <%= post.content %>
+     <% end %>
+
+</ul>
