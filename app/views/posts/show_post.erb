@@ -6,7 +6,11 @@
 <div>
     <%= @post.content %>
 </div>
-
+<br>
 <% if current_user.id == @post.student_id %>
-    <a href="/posts/<%= @post.id %>/edit"> Edit Post </a>
+    <a href="/posts/<%= @post.id %>/edit"> Edit Post </a><br></br>
+    <form method="post" action="/posts/<%=@post.id%>/delete">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete">
+    </form>
 <% end %>

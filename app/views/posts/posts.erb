@@ -1,14 +1,18 @@
 <a href="/students/<%=current_user.slug %>">Home</a><br>
 
+<a href="/logout">Log Out</a><br></br>
+
 <h1>All Publications</h1>
+<a href="/posts/new">Create a Post</a> <br></br>
 <ul>
     <% @posts.each do |post| %>
         <h5><a href="/posts/<%= post.id %>"><%= post.title %></a></h5>
 
-        Shared by: <%= @author.first_name %> <%= @author.last_name %><br>
+        <% author = @students.find_by(:id => post.student_id) %>
+        Shared by: <strong><%= author.first_name %> <%= author.last_name %></strong><br>
 
         <%= post.content %><br>
-        Published: <%= post.created_at %><br></br>
+        Published: <%= post.created_at %><br>
         <% if post.created_at != post.updated_at %>
             Edited: <%= post.updated_at %>
         <% end %>    
@@ -16,9 +20,10 @@
 
 </ul>
 <h3>Find Resourses by Course</h3>
+        <a href="/courses">All Courses</a>
     <ul>
         <% @courses.each do |course| %>
-        <li><%= course.name %></li>
+        <li><a href="/courses/<%= course.id %>"><%= course.name %></a></li>
         <% end %>
     </ul>
 

@@ -3,9 +3,7 @@ class PostsController < ApplicationController
     get '/posts' do 
         if logged_in?
             @posts = Post.all
-            @posts.each do |post|
-                @author = Student.find_by(:id => post.student_id)
-            end
+            @students = Student.all
             @courses = Course.all
             erb :'/posts/posts'
         else
@@ -23,17 +21,19 @@ class PostsController < ApplicationController
     end
 
     post '/posts' do
-        # binding.pry
-        @course_association = Course.find_by(:name => params[:course])
-        if params[:course] != @course_association
-            Course.create(:name => params[:course])
-        end 
-        @post = Post.create(:title => params[:title], :course_id => @course_association.id, :content => params[:content], :student_id => current_user.id)
-        redirect to "/posts/#{@post.id}"
+        if logged_in?
+              @course_association = Course.find_by(:name => params[:course])
+              if params[:course] != @course_association
+                  Course.create(:name => params[:course])
+              end 
+              @post = Post.create(:title => params[:title], :course_id => @course_association.id, :content => params[:content], :student_id => current_user.id)
+              redirect to "/posts/#{@post.id}"
+        else
+            redirect to '/'
+        end
     end
 
     get '/posts/:id' do
-        # binding.pry
         if logged_in?
             @post = Post.find_by_id(params[:id])
             @author = Student.find_by(:id => @post.student_id)
@@ -56,7 +56,7 @@ class PostsController < ApplicationController
     patch '/posts/:id' do 
         # binding.pry
         if logged_in?
-            if  params[:content] == "" || params[:title] == "" || params[:course_id] == ""
+            if  params[:content] == "" || params[:title] == "" || params[:course] == ""
                 redirect to "/posts/#{params[:id]}/edit"
             else
                 @post = Post.find_by_id(params[:id])
@@ -75,4 +75,18 @@ class PostsController < ApplicationController
             redirect to "/login"
         end
     end
+
+    delete '/posts/:id/delete' do
+        if !logged_in?
+            redirect to '/login'
+        else
+            @post = Post.find_by(:id => params[:id])
+            if @post && @post.student_id == current_user.id
+                @post.delete
+                redirect to '/posts'
+            end
+        end
+    end
+
+
 end

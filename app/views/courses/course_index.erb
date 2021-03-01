@@ -1,0 +1,9 @@
+<h1>All Courses</h1>
+
+<ul>
+    <% @courses.each do |course| %>
+        <li><a href="/courses/<%= course.slug %>"><%= course.name %></a></li>
+        <%= course.description %><br></br>
+    <% end %>
+
+</ul>    

@@ -1,14 +1,18 @@
 class StudentsController < ApplicationController
 
     get '/signup' do 
-        erb :'/students/create_students'
+        if logged_in?
+            redirect to '/posts'
+        else
+            erb :'/students/create_students'
+        end
     end
     
     get '/login' do
         if !logged_in?
             erb :'/students/login'
         else
-            redirect to "/posts"
+            redirect to "/students/#{current_user.slug}"
         end
     end
     
@@ -30,9 +34,9 @@ class StudentsController < ApplicationController
 
     post '/login' do
         student = Student.find_by(:email => params[:email])
-        if student && student.authentificate(params[:password])
+        if student && student.authenticate(params[:password])
             session[:user_id] = student.id
-            redirect to '/posts'
+            redirect to "/students/#{current_user.slug}"
         else
             redirect to '/signup'
         end
@@ -43,9 +47,19 @@ class StudentsController < ApplicationController
             @student = Student.find_by_slug(params[:slug])
             erb :'/students/show'
         else
-            redirect to "/login"
+            redirect to "/"
         end
     end
+
+    get '/logout' do
+        if logged_in?
+            session.destroy
+            redirect to '/login'
+        else 
+            redirect to '/'
+        end
+    end
+
 
 
 end
