@@ -1,6 +1,6 @@
 require_relative './config/environment'
 require 'sinatra/activerecord/rake'
-require_relative './app/controllers'
+require_all 'app'
 
 
 

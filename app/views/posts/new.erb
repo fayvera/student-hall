@@ -1,0 +1,16 @@
+<h1>Create a post</h1>
+    <p>
+    <form method="post" action="/posts">
+        <input type="text" name="title" placeholder="Title"><br></br>
+
+        <input list="courses" name="course" id="course" placeholder="Course">
+            <datalist id="courses">
+                <% @courses.each do |course|%>
+                <option value="<%= course.name %>" ><br>
+                <% end %>
+        </datalist><br></br>
+
+        <textarea name="content">Share some knowledge!</textarea><br>
+    </p>
+        <input type="submit" value="Create Post">
+    </form>
