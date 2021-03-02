@@ -2,13 +2,12 @@
     <p>
     <form method="post" action="/posts">
         <input type="text" name="title" placeholder="Title"><br></br>
-
-        <input list="courses" name="course" id="course" placeholder="Course">
-            <datalist id="courses">
+        
+            <select id="courses">
                 <% @courses.each do |course|%>
-                <option value="<%= course.name %>" ><br>
+                <option value="<%= course.name %>"><%= course.name%> </option><br>
                 <% end %>
-        </datalist><br></br>
+        </select><br></br>
 
         <textarea name="content" rows="10" cols="30">Share some knowledge!</textarea><br>
     </p>

@@ -2,8 +2,13 @@
 
 <ul>
     <% @courses.each do |course| %>
-        <li><a href="/courses/<%= course.slug %>"><%= course.name %></a></li>
-        <%= course.description %><br></br>
+        <h4><a href="/courses/<%= course.slug %>"><%= course.name %></a></h4>
+        <li><%= course.description %></li><br>
+        <a href="/courses/">Enroll</a>
+        <br></br> 
     <% end %>
 
 </ul>    
+</br>
+
+<a href="/course/create_course">Add a Course</a>

@@ -1,12 +1,16 @@
 <a href="/students/<%=current_user.slug %>">Home</a><br>
 
 <a href="/logout">Log Out</a><br></br>
+<a href="/courses">All Courses</a><br>
 
 <h1>All Publications</h1>
 <a href="/posts/new">Create a Post</a> <br></br>
+
 <ul>
     <% @posts.each do |post| %>
         <h5><a href="/posts/<%= post.id %>"><%= post.title %></a></h5>
+        <% course = @courses.find_by(:id => post.course_id) %>
+        Subject: <%= course.name %><br>
 
         <% author = @students.find_by(:id => post.student_id) %>
         Shared by: <strong><%= author.first_name %> <%= author.last_name %></strong><br>
@@ -19,6 +23,7 @@
     <% end %>
 
 </ul>
+<-- Create view for courses-->
 <h3>Find Resourses by Course</h3>
         <a href="/courses">All Courses</a>
     <ul>

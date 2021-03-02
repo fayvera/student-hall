@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 
     get '/posts' do 
+        # binding.pry
         if logged_in?
             @posts = Post.all
             @students = Student.all
@@ -23,21 +24,22 @@ class PostsController < ApplicationController
     post '/posts' do
         if logged_in?
               @course_association = Course.find_by(:name => params[:course])
-              if params[:course] != @course_association
-                  Course.create(:name => params[:course])
-              end 
+            #   if params[:course] != @course_association.name
+            #       Course.create(:name => params[:course])
+            #   end 
               @post = Post.create(:title => params[:title], :course_id => @course_association.id, :content => params[:content], :student_id => current_user.id)
-              redirect to "/posts/#{@post.id}"
+              redirect to "/courses/#{@post.course.slug}"
         else
             redirect to '/'
         end
     end
 
     get '/posts/:id' do
+        # binding.pry
         if logged_in?
             @post = Post.find_by_id(params[:id])
-            @author = Student.find_by(:id => @post.student_id)
-            @course = Course.find_by(:id => @post.course_id)
+            @author = @post.student
+            @course = @post.course
             erb :"/posts/show_post"
         else 
             redirect to '/login'

@@ -1,0 +1,29 @@
+@media screen {
+  /* --- Reset Styles --- */
+  * {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    height: 100%;
+    width: 100%;
+  }
+
+
+body {
+  background-color: #99DDE9;
+  margin: 100px;
+}
+h1 {
+  alignment: center; 
+  color: blue;
+}
+p {
+  margin: 70px;
+  border: 2px solid powderblue;  
+  color: red;
+}
+
+
