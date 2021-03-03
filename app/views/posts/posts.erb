@@ -1,34 +1,43 @@
-<a href="/students/<%=current_user.slug %>">Home</a><br>
+<div class="navbar">
+  <a href="/students/<%=current_user.slug %>">Home</a>
+  <a href="/posts" class="active">All Publications</a>
+  <div class="dropdown">
+    <button class="dropbtn">Courses 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+        <% @courses.each do |course| %>
+            <a href="/courses/<%= course.slug %>"><%= course.name %></a>
+        <% end %>
+    </div>
+  </div> 
+    <a href="/logout" class="right">Log Out</a>
+</div>
 
-<a href="/logout">Log Out</a><br></br>
-<a href="/courses">All Courses</a><br>
 
+<div class="row">
 <h1>All Publications</h1>
+<br>
 <a href="/posts/new">Create a Post</a> <br></br>
 
 <ul>
     <% @posts.each do |post| %>
-        <h5><a href="/posts/<%= post.id %>"><%= post.title %></a></h5>
+        <div class="side">
+        <h4><a href="/posts/<%= post.id %>"><%= post.title %></a></h4>
         <% course = @courses.find_by(:id => post.course_id) %>
-        Subject: <%= course.name %><br>
+        <p class="right">Subject: <%= course.name %><br></p>
 
         <% author = @students.find_by(:id => post.student_id) %>
         Shared by: <strong><%= author.first_name %> <%= author.last_name %></strong><br>
 
-        <%= post.content %><br>
-        Published: <%= post.created_at %><br>
+        <p class="post"><%= post.content %><br></p>
+        <p class="time">Published: <%= post.created_at %></p>
         <% if post.created_at != post.updated_at %>
-            Edited: <%= post.updated_at %>
-        <% end %>    
-    <% end %>
-
-</ul>
-<-- Create view for courses-->
-<h3>Find Resourses by Course</h3>
-        <a href="/courses">All Courses</a>
-    <ul>
-        <% @courses.each do |course| %>
-        <li><a href="/courses/<%= course.slug %>"><%= course.name %></a></li>
+           <p class="time">Edited: <%= post.updated_at %></p>
+           
         <% end %>
-    </ul>
-
+        </div>
+        <br>    
+    <% end %>
+           
+</div>

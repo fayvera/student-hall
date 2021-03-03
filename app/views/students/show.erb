@@ -1,18 +1,31 @@
-<a href="/logout">Log Out</a><br>
+
+<div class="navbar">
+  <a href="/students/<%=current_user.slug %>" class="active">Home</a>
+  <a href="/posts">All Publications</a>
+  <a href="/courses">All Courses</a>
+  <a href="/logout" class="right">Log Out</a>
+</div>
 
 
-<h1><%= @student.first_name %> <%= @student.last_name %></h1>
+
+<h1 class="name"><%= @student.first_name %> <%= @student.last_name %></h1>
 
 <h3>Here are <%= @student.first_name %>'s resourses:</h3>
     <ul>
+      <p>  
         <% @student.posts.each do |post| %>
-            <h4><a href="/posts/<%= post.id %>"> <%= post.title %> </a></h4>
-            <%= post.content %>
+            <p>
+            <div class="side">
+            <h4><%= post.title %></h4>
+            <p class="post"><%= post.content %></p>
+            <a class="show" href="/posts/<%= post.id %>"> View Post </a>
+            </div>
+            </p>
+           
             <% end %>
+      </p>    
     </ul>
 
     <a href="/posts/new">Create a Post</a> <br></br>
-
-    <a href="/posts">All Publications</a><br></br>
     
    
