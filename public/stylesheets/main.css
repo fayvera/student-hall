@@ -195,3 +195,12 @@ a {
 }
 
 
+.course a {
+  color: black;
+  font: Helvetica;
+}
+
+.description {
+  font-size: 20;
+
+}

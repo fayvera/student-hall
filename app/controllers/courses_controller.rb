@@ -18,16 +18,25 @@ class CoursesController < ApplicationController
         end
     end
 
-    get '/courses/new' do
+    get "/courses/new" do
         if logged_in?
-            erb :"/courses/create_course"
+            @courses = Course.all
+            erb :'/courses/create_course'
         else
             redirect to '/login'
         end
     end
 
     post '/courses' do 
-
-
+        if logged_in?
+            if params[:name] == Course.find_by(:name => params[:name])
+                redirect to "/courses/new", notice: "Study group already exists"
+            else
+                course = Course.create(:name => params[:name], :description => params[:description])
+                redirect to "/courses/#{course.slug}"
+            end
+        else
+            redirect to '/login'
+        end
     end
 end

@@ -60,7 +60,7 @@ class PostsController < ApplicationController
         # binding.pry
         if logged_in?
             if  params[:content] == "" || params[:title] == "" || params[:course] == ""
-                redirect to "/posts/#{params[:id]}/edit"
+                redirect to "/posts/#{params[:id]}/edit", notice: "One or more fields left empty"
             else
                 @post = Post.find_by_id(params[:id])
                 if @post && @post.student_id == current_user.id

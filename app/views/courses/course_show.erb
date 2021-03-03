@@ -13,9 +13,11 @@
 
 <ul>    
     <% @posts.each do |post| %>
-    <li><a href="/posts/<%= post.id %>"><%= post.title %></a></li>
+    <div class="side">
+    <a href="/posts/<%= post.id %>"><%= post.title %></a><br>
         By: <strong><%= post.student.first_name %> <%= post.student.last_name %></strong><br>
-        <%= post.content %>
-     <% end %>
+       <p class="post"><%= post.content %></p>
+    </div>
+    <% end %>
 
 </ul>
