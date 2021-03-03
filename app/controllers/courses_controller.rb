@@ -8,6 +8,15 @@ class CoursesController < ApplicationController
         end
     end
 
+    get "/courses/new" do
+        if logged_in?
+            @courses = Course.all
+            erb :'/courses/create_course'
+        else
+            redirect to '/login'
+        end
+    end
+
     get '/courses/:slug' do 
         if logged_in?
             @course = Course.find_by_slug(params[:slug])
@@ -18,14 +27,7 @@ class CoursesController < ApplicationController
         end
     end
 
-    get "/courses/new" do
-        if logged_in?
-            @courses = Course.all
-            erb :'/courses/create_course'
-        else
-            redirect to '/login'
-        end
-    end
+
 
     post '/courses' do 
         if logged_in?
@@ -36,6 +38,33 @@ class CoursesController < ApplicationController
                 redirect to "/courses/#{course.slug}"
             end
         else
+            redirect to '/login'
+        end
+    end
+
+    patch '/courses/:id/enroll' do
+        # binding.pry
+        if logged_in?
+            @course = Course.find_by_id(params[:id])
+            if @course && !current_user.courses.include?(@course)
+               current_user.courses << @course 
+            end
+            flash[:alert] = "Student Enrolled!"
+            redirect to "/courses/#{@course.slug}"
+        else 
+            redirect to '/login'
+        end 
+    end
+
+    patch '/courses/:id/unenroll' do
+        if logged_in?
+            @course = Course.find_by_id(params[:id])
+            if @course && current_user.courses.include?(@course)
+               current_user.courses.delete(@course) 
+            end
+            flash[:alert] = "Student Unenrolled!"
+            redirect to "/courses/#{@course.slug}"
+        else 
             redirect to '/login'
         end
     end

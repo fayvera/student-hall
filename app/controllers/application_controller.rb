@@ -8,7 +8,9 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, "secret"
   end
-
+  
+  register(Sinatra::Flash)
+  
   get '/' do
     if logged_in?
       redirect to "/posts/posts"

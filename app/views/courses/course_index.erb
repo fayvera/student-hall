@@ -12,8 +12,7 @@
     <% @courses.sort_by(&:name).each do |course| %>
         <div class="side">
         <h4><a href="/courses/<%= course.slug %>"><%= course.name %></a></h4>
-        <i class="description"><%= course.description %></i>
-        <a href="/courses/">Enroll</a>
+        <i class="description"><%= course.description %></i>   
         </div>
         <br></br> 
     <% end %>

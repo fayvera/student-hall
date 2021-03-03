@@ -1,6 +1,7 @@
 class Student < ActiveRecord::Base
     has_secure_password
     has_many :posts
+    has_many :student_courses
     has_many :courses, through: :student_courses
 
     validates_uniqueness_of(:email)

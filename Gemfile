@@ -12,4 +12,4 @@ gem 'pry'
 gem 'bcrypt'
 gem "tux"
 gem 'bootstrap', '~> 4.0'
-gem 'flash', '~> 0.1.0'
+gem 'sinatra-flash'
