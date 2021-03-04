@@ -35,26 +35,26 @@
   <h2> <%= @student.first_name %> <%= @student.last_name %>'s Posts </h2>
 <% end %>
 
-  <% if @student.posts = [] %>
-    <p class="no_post"> No shared resourses yet! </p>
-
-  <% else %>
+<% if @student.posts != [] %>
     <ul>
       <p>  
         <% @student.posts.each do |post| %>
             <p>
-            <div class="main">
+            <div class="side">
             <h4><%= post.title %></h4>
             <p class="post"><%= post.content %></p>
-            <h5> post.created_at </h5>
+            <h5> Published: <%= post.created_at %></h5>
             <a class="show" href="/posts/<%= post.id %>"> View Post </a>
             </div>
             </p>
            
             <% end %>
+
       </p>    
     </ul>
-  <% end %>
+    <% else %>        
+    <p class="no_post"> No shared resourses yet! </p>
+<% end %>
 
     
   </div>

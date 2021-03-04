@@ -38,6 +38,7 @@ body {
   border: 3px white;
   border-radius: 12px;
   padding: 20px;
+  display: flex;
 }
 
 .main {   
@@ -47,6 +48,7 @@ body {
   background-color: white;
   border-radius: 12px;
   padding: 20px;
+  display: flex;
 }
 
 /* Header/logo Title */
@@ -202,4 +204,14 @@ a {
 .notice {
   font-size: 16px;
   color: #4D5DC5;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }

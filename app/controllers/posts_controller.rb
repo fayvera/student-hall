@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
     get '/posts' do 
-        binding.pry
+        # binding.pry
 
         if logged_in?
             @posts = Post.all
@@ -42,9 +42,13 @@ class PostsController < ApplicationController
     end
 
     post '/posts' do
+    #     binding.pry
         if logged_in?
               @course_association = Course.find_by(:name => params[:course])
               @post = Post.create(:title => params[:title], :course_id => @course_association.id, :content => params[:content], :student_id => current_user.id)
+              
+              current_user.posts << @post
+              
               redirect to "/courses/#{@post.course.slug}"
         else
             redirect to '/'

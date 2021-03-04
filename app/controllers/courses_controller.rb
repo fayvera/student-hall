@@ -18,6 +18,7 @@ class CoursesController < ApplicationController
     end
 
     get '/courses/:slug' do 
+        # binding.pry
         if logged_in?
             @course = Course.find_by_slug(params[:slug])
             @posts = @course.posts 
@@ -43,7 +44,7 @@ class CoursesController < ApplicationController
     end
 
     post '/courses/:id/enroll' do
-        binding.pry
+        # binding.pry
         if logged_in?
             @course = Course.find_by_id(params[:id])
             if @course && !current_user.courses.include?(@course)

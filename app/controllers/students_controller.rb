@@ -54,7 +54,7 @@ class StudentsController < ApplicationController
             # binding.pry
             erb :'/students/show'
         else
-            redirect to "/"
+            redirect to "/login"
         end
     end
 
@@ -63,7 +63,7 @@ class StudentsController < ApplicationController
             session.destroy
             redirect to '/login'
         else 
-            redirect to '/'
+            redirect to '/login'
         end
     end
 
