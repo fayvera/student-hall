@@ -1,12 +1,14 @@
 class PostsController < ApplicationController
 
     get '/posts' do 
-        # binding.pry
+        binding.pry
+
         if logged_in?
             @posts = Post.all
-            @students = Student.all
             @courses = Course.all
             erb :'/posts/posts'
+            # <% course = @courses.find_by(:id => post.course_id) %>
+            # <% author = @students.find_by(:id => post.student_id) %>
         else
             redirect to '/login'
         end
@@ -21,25 +23,10 @@ class PostsController < ApplicationController
         end
     end
 
-    post '/posts' do
-        if logged_in?
-              @course_association = Course.find_by(:name => params[:course])
-            #   if params[:course] != @course_association.name
-            #       Course.create(:name => params[:course])
-            #   end 
-              @post = Post.create(:title => params[:title], :course_id => @course_association.id, :content => params[:content], :student_id => current_user.id)
-              redirect to "/courses/#{@post.course.slug}"
-        else
-            redirect to '/'
-        end
-    end
-
     get '/posts/:id' do
         # binding.pry
         if logged_in?
             @post = Post.find_by_id(params[:id])
-            @author = @post.student
-            @course = @post.course
             erb :"/posts/show_post"
         else 
             redirect to '/login'
@@ -56,17 +43,26 @@ class PostsController < ApplicationController
         end
     end
 
+    post '/posts' do
+        if logged_in?
+              @course_association = Course.find_by(:name => params[:course])
+              @post = Post.create(:title => params[:title], :course_id => @course_association.id, :content => params[:content], :student_id => current_user.id)
+              redirect to "/courses/#{@post.course.slug}"
+        else
+            redirect to '/'
+        end
+    end
+
     patch '/posts/:id' do 
-        # binding.pry
         if logged_in?
             if  params[:content] == "" || params[:title] == "" || params[:course] == ""
-                redirect to "/posts/#{params[:id]}/edit" #, flash[:notice] = "One or more fields left empty"
-                
+                flash[:notice] = "One or more fields left empty"
+                redirect to "/posts/#{params[:id]}/edit"  
             else
                 @post = Post.find_by_id(params[:id])
                 if @post && @post.student_id == current_user.id
                     @course_association = Course.find_by(:name => params[:course])
-                    if @post.update(content: params[:content], title: params[:title], course_id: @course_association.id)
+                    if @post.update(content: params[:content], title: params[:title], course_id: @course_association.id, student_id: @post.student_id)
                         redirect to "/posts/#{@post.id}"
                     else 
                         redirect tp "/posts/#{@post.id}/edit"
@@ -91,7 +87,5 @@ class PostsController < ApplicationController
             end
         end
     end
-
-
 
 end

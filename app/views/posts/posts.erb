@@ -7,7 +7,7 @@
     </button>
     <div class="dropdown-content">
         <% @courses.each do |course| %>
-            <a href="/courses/<%= course.slug %>"><%= course.name %></a>
+            <a href="/courses/<%= course.slug %>"> <%= course.name %></a>
         <% end %>
     </div>
   </div> 
@@ -15,22 +15,26 @@
 </div>
 
 
+
+
+
+
 <div class="row">
 <h1>All Publications</h1>
 <br>
-<a href="/posts/new">Create a Post</a> <br></br>
+<h4><a href="/posts/new">Create a Post</a></h4> <br></br>
 
 <ul>
     <% @posts.each do |post| %>
-        <div class="side">
+        <div class="side" >
         <h4><a href="/posts/<%= post.id %>"><%= post.title %></a></h4>
-        <% course = @courses.find_by(:id => post.course_id) %>
-        <p class="right">Subject: <%= course.name %><br></p>
 
-        <% author = @students.find_by(:id => post.student_id) %>
-        Shared by: <strong><%= author.first_name %> <%= author.last_name %></strong><br>
+        <p class="right"> Subject: <%= post.course.name %></p><br>
 
-        <p class="post"><%= post.content %><br></p>
+
+        <h4> Shared by: <a href="/students/<%= post.student.slug %>"><strong><%= post.student.first_name %> <%= post.student.last_name %></strong></a></h4>
+        
+        <p class="post"> <%= post.content %> </p><br>
         <p class="time">Published: <%= post.created_at %></p>
         <% if post.created_at != post.updated_at %>
            <p class="time">Edited: <%= post.updated_at %></p>

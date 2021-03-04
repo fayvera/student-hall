@@ -42,27 +42,26 @@ class CoursesController < ApplicationController
         end
     end
 
-    patch '/courses/:id/enroll' do
-        # binding.pry
+    post '/courses/:id/enroll' do
         if logged_in?
             @course = Course.find_by_id(params[:id])
             if @course && !current_user.courses.include?(@course)
                current_user.courses << @course 
             end
-            flash[:alert] = "Student Enrolled!"
+            flash[:notice] = "Student Enrolled!"
             redirect to "/courses/#{@course.slug}"
         else 
             redirect to '/login'
         end 
     end
 
-    patch '/courses/:id/unenroll' do
+    post '/courses/:id/unenroll' do
         if logged_in?
             @course = Course.find_by_id(params[:id])
             if @course && current_user.courses.include?(@course)
                current_user.courses.delete(@course) 
             end
-            flash[:alert] = "Student Unenrolled!"
+            flash[:notice] = "Student Unenrolled!"
             redirect to "/courses/#{@course.slug}"
         else 
             redirect to '/login'

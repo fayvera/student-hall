@@ -11,9 +11,9 @@
     <form method="post" action="/posts">
         <input type="text" name="title" placeholder="Title"><br></br>
         
-            <select id="courses">
+            <select name="course" id="courses">
                 <% @courses.each do |course|%>
-                <option value="<%= course.name %>"><%= course.name%> </option><br>
+                <option name="course" value="<%= course.name %>"><%= course.name%> </option><br>
                 <% end %>
         </select><br></br>
 

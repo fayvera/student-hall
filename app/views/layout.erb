@@ -6,18 +6,20 @@
 
             <link rel="stylesheet" href="/stylesheets/main.css"/>
 
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <meta name="viewport" content="width=device-width, initial-scale=1">
             
         </head>
 
         <body>
         <div class="header">
-            <h1 id="header">Study Hall</h1>
+            <h1>Study Hall</h1>
             <p> The best place to share resourses! </p>
         </div>
+        <% unless flash.empty? %>
             <% flash.each do |key, msg| %>
-                <%= content_tag :div, msg, class="key"%>
-            <% end %>    
+              <div class="notice"> <%= msg %> </div>
+            <% end %> 
+        <% end %>        
 
                 <%= yield %>
 

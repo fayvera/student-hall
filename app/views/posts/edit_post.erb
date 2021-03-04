@@ -13,9 +13,9 @@
         <input type="text" name="title" value="<%= @post.title %>"><br></br>
         
         <input list="courses" name="course" id="course" placeholder="Course">
-        <datalist id="courses">
+        <datalist name="course" id="courses">
         <% @courses.each do |course| %>
-            <option value="<%= course.name %>" ><br>
+            <option name="course" value="<%= course.name %>" ><br>
         <% end %>
         </datalist><br></br>
 

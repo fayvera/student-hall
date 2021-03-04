@@ -1,4 +1,12 @@
 @media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+* {
+  box-sizing: border-box;
+}
+
 }
 html {
     background: #DCE3E6;
@@ -14,44 +22,45 @@ body {
   padding: 20px;
   box-shadow: 0 0.3em 1em #000;
 }
-
-  /* Main column */
-.main {   
-  -ms-flex: 70%; /* IE10 */
-  flex: 70%;
-  background-color: white;
-  padding: 20px;
+.row {  
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
 }
+
 .side {
   -ms-flex: 30%; /* IE10 */
   flex: 30%;
+  /* float: left; */
+  /* width: 10%; */
   background-color: #f1f1f1;
+  border: 3px white;
+  border-radius: 12px;
   padding: 20px;
 }
 
+.main {   
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  /* float: right; */
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+}
 
+/* Header/logo Title */
 .header {
-  padding: 45px;
+  padding: 80px;
   text-align: center;
   background: #1abc9c;
   color: white;
-  font-size: 20px;
   font-family: verdana;
 }
 
-#header {
-  padding: 20px;
-  text-align: center;
-  background: #1abc9c;
-  color: white;
-  font-size: 40px;
-  font-family: verdana;
-  word-wrap: break-word;
-}
-
-
+/* Increase the font size of the heading */
 .header h1 {
-  font-size: 50px;
+  font-size: 40px;
 }
 
 .name {
@@ -113,21 +122,6 @@ a {
   color: black;
 }
 
-.row {  
-  display: -ms-flexbox; /* IE10 */
-  display: flex;
-  -ms-flex-wrap: wrap; /* IE10 */
-  flex-wrap: wrap;
-}
-
-.side {
-  -ms-flex: 20%; /* IE10 */
-  flex: 20%;
-  background-color: #f1f1f1;
-  border: 3px white;
-  border-radius: 12px;
-  padding: 10px;
-}
 .post {
   width: 70%;
   background-color: #aaa;
@@ -136,12 +130,6 @@ a {
   border-radius: 5px;
   padding: 10px;
   margin: 10px;
-}
-.main {   
-  -ms-flex: 70%; /* IE10 */
-  flex: 70%;
-  background-color: white;
-  padding: 20px;
 }
 
 .time {
@@ -203,4 +191,15 @@ a {
 .description {
   font-size: 20;
 
+}
+
+.no_post {
+  font-size: 30px;
+  color: #51555F;
+  padding: 30px;
+}
+
+.notice {
+  font-size: 16px;
+  color: #4D5DC5;
 }

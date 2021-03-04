@@ -21,9 +21,11 @@ class StudentsController < ApplicationController
             redirect to "/posts"
         else
             if params[:first_name] == "" || params[:last_name] == "" || params[:email] == "" || params[:password] == ""
-                redirect to '/signup', locals = {message: "Please fill out all fields"}
-            # elsif params[:email] == Student.find_by(email: params[:email])
-            #     redirect to '/signup', locals = {message: "Email is already in use. Please use another email or log in if you have an account."}
+                flash[:notice] = "Please fill out all fields"
+                redirect to '/signup'
+            elsif params[:email] == Student.find_by(email: params[:email])
+                flash[:notice] = "Email is already in use. Please use another email or log in if you have an account"
+                redirect to '/signup'
             else
                 @student = Student.create(:first_name => params[:first_name], :last_name => params[:last_name], :email => params[:email], :password => params[:password])
                 session[:user_id] = @student.id

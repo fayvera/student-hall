@@ -7,9 +7,9 @@
 </div>
 
 <h2><%= @post.title %></h2>
-    Author: <strong><%= @author.first_name %> <%=@author.last_name %></strong>
+    Author: <strong><%= @post.student.first_name %> <%=@post.student.last_name %></strong>
 <div>
-    Course: <%= @course.name %><br></br>
+    Course: <%= @post.course.name %><br></br>
     <%= @post.content %>
 </div>
 <br>

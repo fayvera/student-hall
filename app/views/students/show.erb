@@ -5,12 +5,40 @@
   <a href="/courses">All Courses</a>
   <a href="/logout" class="right">Log Out</a>
 </div>
+<br>
 
+<% if current_user.slug  == @student.slug %>
+    <h1>Home</h1>
+<% else %>
+  <h1> <%= @student.first_name %> <%= @student.last_name %>'s Page </h1>
+<% end %>
 
+<div class="row">
+  <div class="side">
+    <h1 class="name"><%= @student.first_name %> <%= @student.last_name %></h1>
+    <h3>Enrolled in:</h3>
+        
+        <%@student.courses.each do |course| %>
+          <ul>
+            <p> <%= course.name %> </p>
+          </ul>
+        <% end %>  
 
-<h1 class="name"><%= @student.first_name %> <%= @student.last_name %></h1>
+</div>
+<div class="row">
+  <div class="main">
 
-<h3>Here are <%= @student.first_name %>'s resourses:</h3>
+<% if current_user.slug  == @student.slug %>
+  <h2>Your Posts</h2>
+  <a class="right" href="/posts/new">Create a Post</a>
+<% else %>
+  <h2> <%= @student.first_name %> <%= @student.last_name %>'s Posts </h2>
+<% end %>
+
+  <% if @student.posts = [] %>
+    <p class="no_post"> No shared resourses yet! </p>
+
+  <% else %>
     <ul>
       <p>  
         <% @student.posts.each do |post| %>
@@ -18,6 +46,7 @@
             <div class="side">
             <h4><%= post.title %></h4>
             <p class="post"><%= post.content %></p>
+            <h5> post.created_at </h5>
             <a class="show" href="/posts/<%= post.id %>"> View Post </a>
             </div>
             </p>
@@ -25,7 +54,8 @@
             <% end %>
       </p>    
     </ul>
+  <% end %>
 
-    <a href="/posts/new">Create a Post</a> <br></br>
     
-   
+  </div>
+</div>

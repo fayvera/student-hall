@@ -11,12 +11,10 @@
 
     <% if current_user.courses.include?(@course) %>  
         <form method="post" action="/courses/<%=@course.id%>/unenroll">
-            <input type="hidden" name="_method" value="patch">
             <input type="submit" value="Unenroll">
         </form>
     <% else %>    
         <form method="post" action="/courses/<%=@course.id%>/enroll">
-            <input type="hidden" name="_method" value="patch">
             <input type="submit" value="Enroll">
         </form> 
     <% end %>    
