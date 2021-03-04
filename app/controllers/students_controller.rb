@@ -27,8 +27,9 @@ class StudentsController < ApplicationController
                 flash[:notice] = "Email is already in use. Please use another email or log in if you have an account"
                 redirect to '/signup'
             else
-                @student = Student.create(:first_name => params[:first_name], :last_name => params[:last_name], :email => params[:email], :password => params[:password])
-                session[:user_id] = @student.id
+                student = Student.create(:first_name => params[:first_name], :last_name => params[:last_name], :email => params[:email], :password => params[:password])
+                session[:user_id] = student.id
+                flash[:notice] = "Welcome to Study Hall!"
                 redirect to "/posts"
             end 
         end
@@ -38,15 +39,19 @@ class StudentsController < ApplicationController
         student = Student.find_by(:email => params[:email])
         if student && student.authenticate(params[:password])
             session[:user_id] = student.id
+            flash[:notice] = "Welcome Back!"
             redirect to "/students/#{current_user.slug}"
         else
+            flash[:notice] = "No student found! Please sign up."
             redirect to '/signup'
         end
     end
 
     get '/students/:slug' do
+ 
         if logged_in?
             @student = Student.find_by_slug(params[:slug])
+            # binding.pry
             erb :'/students/show'
         else
             redirect to "/"

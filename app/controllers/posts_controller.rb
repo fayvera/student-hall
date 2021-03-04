@@ -7,8 +7,6 @@ class PostsController < ApplicationController
             @posts = Post.all
             @courses = Course.all
             erb :'/posts/posts'
-            # <% course = @courses.find_by(:id => post.course_id) %>
-            # <% author = @students.find_by(:id => post.student_id) %>
         else
             redirect to '/login'
         end
