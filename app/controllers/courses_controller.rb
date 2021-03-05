@@ -18,7 +18,6 @@ class CoursesController < ApplicationController
     end
 
     get '/courses/:slug' do 
-        # binding.pry
         if logged_in?
             @course = Course.find_by_slug(params[:slug])
             @posts = @course.posts 
@@ -28,7 +27,16 @@ class CoursesController < ApplicationController
         end
     end
 
+    get '/courses/:id/edit' do
+        if logged_in?
+            @course = Course.find_by_id(params[:id])
+            if @course && @course.
 
+        else
+            redirect to '/login'
+            end
+        end
+    end
 
     post '/courses' do 
         if logged_in?
@@ -44,7 +52,6 @@ class CoursesController < ApplicationController
     end
 
     post '/courses/:id/enroll' do
-        # binding.pry
         if logged_in?
             @course = Course.find_by_id(params[:id])
             if @course && !current_user.courses.include?(@course)
@@ -69,4 +76,6 @@ class CoursesController < ApplicationController
             redirect to '/login'
         end
     end
+
+    
 end

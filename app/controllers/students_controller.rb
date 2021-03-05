@@ -42,8 +42,8 @@ class StudentsController < ApplicationController
             flash[:notice] = "Welcome Back!"
             redirect to "/students/#{current_user.slug}"
         else
-            flash[:notice] = "No student found! Please sign up."
-            redirect to '/signup'
+            flash[:notice] = "Incorrect Password"
+            redirect to '/login'
         end
     end
 

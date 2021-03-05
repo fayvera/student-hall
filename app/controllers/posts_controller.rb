@@ -1,8 +1,6 @@
 class PostsController < ApplicationController
 
     get '/posts' do 
-        # binding.pry
-
         if logged_in?
             @posts = Post.all
             @courses = Course.all
@@ -22,7 +20,6 @@ class PostsController < ApplicationController
     end
 
     get '/posts/:id' do
-        # binding.pry
         if logged_in?
             @post = Post.find_by_id(params[:id])
             erb :"/posts/show_post"
@@ -32,6 +29,7 @@ class PostsController < ApplicationController
     end
 
     get '/posts/:id/edit' do 
+        # binding.pry
         if logged_in?
             @courses = Course.all
             @post = Post.find_by_id(params[:id])
@@ -42,7 +40,6 @@ class PostsController < ApplicationController
     end
 
     post '/posts' do
-    #     binding.pry
         if logged_in?
               @course_association = Course.find_by(:name => params[:course])
               @post = Post.create(:title => params[:title], :course_id => @course_association.id, :content => params[:content], :student_id => current_user.id)
@@ -60,6 +57,9 @@ class PostsController < ApplicationController
             if  params[:content] == "" || params[:title] == "" || params[:course] == ""
                 flash[:notice] = "One or more fields left empty"
                 redirect to "/posts/#{params[:id]}/edit"  
+            elsif !Course.find_by(:name => params[:course])
+                flash[:notice] = "No courses found with that name"
+                redirect to "/posts/#{params[:id]}/edit"
             else
                 @post = Post.find_by_id(params[:id])
                 if @post && @post.student_id == current_user.id
