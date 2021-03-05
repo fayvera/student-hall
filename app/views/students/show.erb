@@ -6,56 +6,61 @@
   <a href="/logout" class="right">Log Out</a>
 </div>
 <br>
+<div>
+    <% if current_user.slug  == @student.slug %>
+        <h1 class="head_of_page">Home</h1>
+    <% else %>
+        <h1 class="head_of_page"> <%= @student.first_name %> <%= @student.last_name %>'s Page </h1>
+    <% end %>
+</div>
 
-<% if current_user.slug  == @student.slug %>
-    <h1>Home</h1>
-<% else %>
-  <h1> <%= @student.first_name %> <%= @student.last_name %>'s Page </h1>
-<% end %>
+
+
+
+
+
 
 <div class="row">
   <div class="side">
     <h1 class="name"><%= @student.first_name %> <%= @student.last_name %></h1>
+    <br>
     <h3>Enrolled in:</h3>
-        
+    <br>
+      <ul>
         <%@student.courses.each do |course| %>
-          <ul>
             <p> <%= course.name %> </p>
-          </ul>
         <% end %>  
+      </ul>
+  </div>  
+  <br>
 
-</div>
-<div class="row">
   <div class="main">
+    <% if current_user.slug  == @student.slug %>
+        <h2>Your Posts</h2><br>
+        <a class="right" href="/posts/new">Create a Post</a>
+    <% else %>
+        <h2> <%= @student.first_name %> <%= @student.last_name %>'s Posts </h2>
+    <% end %>
 
-<% if current_user.slug  == @student.slug %>
-  <h2>Your Posts</h2>
-  <a class="right" href="/posts/new">Create a Post</a>
-<% else %>
-  <h2> <%= @student.first_name %> <%= @student.last_name %>'s Posts </h2>
-<% end %>
-
-<% if @student.posts != [] %>
-    <ul>
-      <p>  
-        <% @student.posts.each do |post| %>
-            <p>
-            <div class="side">
-            <h4><%= post.title %></h4>
-            <p class="post"><%= post.content %></p>
-            <h5> Published: <%= post.created_at %></h5>
-            <a class="show" href="/posts/<%= post.id %>"> View Post </a>
-            </div>
-            </p>
-           
-            <% end %>
-
-      </p>    
-    </ul>
+    <% if @student.posts != [] %>
+        <ul>
+          <p>  
+            <% @student.posts.each do |post| %>
+                <p>
+                <div class="side">
+                <h4><%= post.title %></h4>
+                <p class="post"><%= post.content %></p>
+                <h5> Published: <%= post.created_at %></h5>
+                <a class="show" href="/posts/<%= post.id %>"> View Post </a>
+                </div>
+                </p>
+            <% end %> 
+          </p>    
+        </ul>
     <% else %>        
-    <p class="no_post"> No shared resourses yet! </p>
-<% end %>
-
-    
+        <p class="no_post"> No shared resourses yet! </p>
+    <% end %>      
   </div>
 </div>
+
+

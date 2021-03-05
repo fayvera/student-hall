@@ -1,45 +1,38 @@
 <div class="navbar">
   <a href="/students/<%=current_user.slug %>">Home</a>
   <a href="/posts" class="active">All Publications</a>
-  <div class="dropdown">
-    <button class="dropbtn">Courses 
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-        <% @courses.each do |course| %>
-            <a href="/courses/<%= course.slug %>"> <%= course.name %></a>
-        <% end %>
-    </div>
-  </div> 
-    <a href="/logout" class="right">Log Out</a>
+  <a href="/courses">All Courses</a>
+  <a href="/logout" class="right">Log Out</a>
 </div>
 
 
 
 
 
-
+<h1 class="head_of_page">All Publications</h1>
 <div class="row">
-<h1>All Publications</h1>
-<br>
-<h4><a href="/posts/new">Create a Post</a></h4> <br></br>
+
+
+
+<button class="button"> <a href="/posts/new">Create a Post</a></button> <br>
 
 <ul>
     <% @posts.each do |post| %>
         <div class="side" >
-        <h4><a href="/posts/<%= post.id %>"><%= post.title %></a></h4>
+        <p>
+        <h3><a href="/posts/<%= post.id %>"><%= post.title %></a></h3>
 
-        <p class="right"> Subject: <%= post.course.name %></p><br>
+        <p class="right"> Subject: <%= post.course.name %></p>
 
 
         <h4> Shared by: <a href="/students/<%= post.student.slug %>"><strong><%= post.student.first_name %> <%= post.student.last_name %></strong></a></h4>
         
         <p class="post"> <%= post.content %> </p><br>
-        <p class="time">Published: <%= post.created_at %></p>
+        <h5> Published: <%= post.created_at %></h5>
         <% if post.created_at != post.updated_at %>
-           <p class="time">Edited: <%= post.updated_at %></p>
-           
+           <h5>Edited: <%= post.updated_at %></h5>     
         <% end %>
+        </p>
         </div>
         <br>    
     <% end %>

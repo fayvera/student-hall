@@ -8,7 +8,7 @@
 
 <h1><%= @course.name %></h1>
 <h3><%= @course.description %></h3>
-
+    <div class="enroll">
     <% if current_user.courses.include?(@course) %>  
         <form method="post" action="/courses/<%=@course.id%>/unenroll">
             <input type="submit" value="Unenroll">
@@ -18,7 +18,7 @@
             <input type="submit" value="Enroll">
         </form> 
     <% end %>    
-
+    </div>
 
 
 
@@ -35,6 +35,7 @@
         By: <strong><%= post.student.first_name %> <%= post.student.last_name %></strong><br>
        <p class="post"><%= post.content %></p>
     </div>
+    <br>
     <% end %>
 
 </ul>

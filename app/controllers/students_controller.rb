@@ -51,7 +51,7 @@ class StudentsController < ApplicationController
  
         if logged_in?
             @student = Student.find_by_slug(params[:slug])
-            # binding.pry
+
             erb :'/students/show'
         else
             redirect to "/login"

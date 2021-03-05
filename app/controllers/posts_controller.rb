@@ -85,6 +85,7 @@ class PostsController < ApplicationController
             @post = Post.find_by(:id => params[:id])
             if @post && @post.student_id == current_user.id
                 @post.delete
+                flash[:notice] = "Post deleted successfully!"
                 redirect to '/posts'
             end
         end

@@ -1,217 +1,153 @@
-@media screen and (max-width: 400px) {
-  .navbar a {
-    float: none;
-    width: 100%;
-  }
-* {
-  box-sizing: border-box;
-}
 
-}
-html {
+* {
+    box-sizing: border-box;
+  }
+  html {
     background: #DCE3E6;
     padding: 5px;
 }
-
-body {
-  background-color: #99DDE9;
-  color: #333;
-  font-family: Sans-Serif;
-  line-height: 18px;
-  margin: 100px;
-  padding: 20px;
-  box-shadow: 0 0.3em 1em #000;
-}
-.row {  
-  display: -ms-flexbox; /* IE10 */
-  display: flex;
-  -ms-flex-wrap: wrap; /* IE10 */
-  flex-wrap: wrap;
-}
-
-.side {
-  -ms-flex: 30%; /* IE10 */
-  flex: 30%;
-  /* float: left; */
-  /* width: 10%; */
-  background-color: #f1f1f1;
-  border: 3px white;
-  border-radius: 12px;
-  padding: 20px;
-  display: flex;
-}
-
-.main {   
-  -ms-flex: 70%; /* IE10 */
-  flex: 70%;
-  /* float: right; */
-  background-color: white;
-  border-radius: 12px;
-  padding: 20px;
-  display: flex;
-}
-
-/* Header/logo Title */
-.header {
-  padding: 80px;
-  text-align: center;
-  background: #1abc9c;
-  color: white;
-  font-family: verdana;
-}
-
-/* Increase the font size of the heading */
-.header h1 {
-  font-size: 40px;
-}
-
-.name {
-  alignment: center; 
-  color: #198CA6;
-  /* text-align: center; */
-  font-family: Optima;
-  font-size: 40px;
-}
-
-.sidebar {
-  background: #eee;
-  border: 1px solid #ccc;
-  float: right;
-  padding: 2.08333333333%; /* 5px / 240px */
-  width: 30%; /* 240px / 800px */
-}
-
-a {
-  size: 40px;
-  line-height: 40px;
-}
- 
-.left {
-  left: 40px;
-  width: 300px;
-  padding: 40px;
-}
-
-.navbar {
-  overflow: hidden;
-  background-color: #333;
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0;
-}
+  /* Style the body */
 
 
-.navbar a {
-  float: left;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 20px; 
-  text-decoration: none;
-}
+  body {
+    background-color: #99DDE9;
+    color: #333;
+    font-family: Sans-Serif;
+    line-height: 18px;
+    margin: 100px;
+    padding: 20px;
+    box-shadow: 0 0.3em 1em #000;
+  }
+  
+  /* Header/logo Title */
+  .header {
+    padding: 80px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    font-family: verdana;
+  }
+  
+  /* Increase the font size of the heading */
+  .header h1 {
+    font-size: 50px;
+  }
+  
+  .name {
+    alignment: center; 
+    color: #198CA6;
+    /* text-align: center; */
+    font-family: Optima;
+    font-size: 40px;
+  }
+  /* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
+  .navbar {
+    overflow: hidden;
+    background-color: #333;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+  }
+  
+  /* Style the navigation bar links */
+  .navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+  }
+  
+  
+  /* Right-aligned link */
+  .navbar a.right {
+    float: right;
+  }
+  
+  /* Change color on hover */
+  .navbar a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  /* Active/current link */
+  .navbar a.active {
+    background-color: #666;
+    color: white;
+  }
+  
+  /* Column container */
+  .row {  
+    
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+  }
+  
+  /* Create two unequal columns that sits next to each other */
+  /* Sidebar/left column */
+  .side {
+    -ms-flex: 30%; /* IE10 */
+    flex: 30%;
+    background-color: #f1f1f1;
+    border: 3px white;
+    border-radius: 12px;
+    padding: 20px;
+  }
+  
+  /* Main column */
+  .main {   
+    -ms-flex: 70%; /* IE10 */
+    flex: 70%;
+    background-color: white;
+    padding: 20px;
+    border: 3px white;
+    border-radius: 12px;
+  }
+  
+  
+  /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 700px) {
+    .row {   
+      flex-direction: column;
+    }
+  }
+  
+  /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+  @media screen and (max-width: 400px) {
+    .navbar a {
+      float: none;
+      width: 100%;
+    }
+  }
 
-.navbar a.active {
-  background-color: #666;
-  color: white;
-}
+  .post {
+    width: 70%;
+    background-color: #aaa;
+    background: white;
+    border: 2px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+  }
 
-.navbar a.right {
-  float: right;
-  color: white;
-}
-.navbar a:hover {
-  background-color: #ddd;
-  color: black;
-}
+  .enroll {
+      float: right;
+      /* height: 400px; */
+  }
 
-.post {
-  width: 70%;
-  background-color: #aaa;
-  background: white;
-  border: 2px solid gray;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
-}
+  .button {
+      display: block;
+      border-radius: 8px;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      float: left;
+  }
 
-.time {
-  font-size: 10px;
-}
-
-.dropdown {
-  float: left;
-  overflow: hidden;
-  padding: 14px 20px;
-  text-decoration: none;
-}
-
-.dropdown .dropbtn {
-  font-size: 16px;  
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 20px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-}
-
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 14px 20px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-
-.course a {
-  color: black;
-  font: Helvetica;
-}
-
-.description {
-  font-size: 20;
-
-}
-
-.no_post {
-  font-size: 30px;
-  color: #51555F;
-  padding: 30px;
-}
-
-.notice {
-  font-size: 16px;
-  color: #4D5DC5;
-}
-
-input[type=text] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
+  .head_of_page {
+      padding: 40px;
+      font-size: 40px;
+  }
