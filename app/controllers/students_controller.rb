@@ -48,10 +48,8 @@ class StudentsController < ApplicationController
     end
 
     get '/students/:slug' do
- 
         if logged_in?
             @student = Student.find_by_slug(params[:slug])
-
             erb :'/students/show'
         else
             redirect to "/login"
@@ -66,8 +64,5 @@ class StudentsController < ApplicationController
             redirect to '/login'
         end
     end
-
-
-
 
 end
