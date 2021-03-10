@@ -28,7 +28,7 @@
     <br>
       <ul>
         <%@student.courses.each do |course| %>
-            <p> <%= course.name %> </p>
+            <p> <a href="/courses/<%= course.slug %>"><%= course.name %> </a></p>
         <% end %>  
       </ul>
   </div>  

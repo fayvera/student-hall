@@ -33,7 +33,12 @@ class PostsController < ApplicationController
         if logged_in?
             @courses = Course.all
             @post = Post.find_by_id(params[:id])
-            erb :"/posts/edit_post"
+            if @post.student == current_user 
+                erb :"/posts/edit_post"
+            else 
+                flash[:notice] = "This is not you post"
+                redirect back    
+            end
         else
             redirect to '/login'
         end
@@ -44,7 +49,7 @@ class PostsController < ApplicationController
               @course_association = Course.find_by(:name => params[:course])
               @post = Post.create(:title => params[:title], :course_id => @course_association.id, :content => params[:content], :student_id => current_user.id)
               
-              current_user.posts << @post
+            #   current_user.posts << @post
               
               redirect to "/courses/#{@post.course.slug}"
         else
@@ -53,7 +58,7 @@ class PostsController < ApplicationController
     end
 
     patch '/posts/:id' do 
-        if logged_in?
+        if logged_in? 
             if  params[:content] == "" || params[:title] == "" || params[:course] == ""
                 flash[:notice] = "One or more fields left empty"
                 redirect to "/posts/#{params[:id]}/edit"  
@@ -84,9 +89,13 @@ class PostsController < ApplicationController
         else
             @post = Post.find_by(:id => params[:id])
             if @post && @post.student_id == current_user.id
-                @post.delete
-                flash[:notice] = "Post deleted successfully!"
-                redirect to '/posts'
+                if @post.destroy
+                    flash[:notice] = "Post deleted successfully!"
+                    redirect to '/posts'
+                else
+                    flash[:notice] = "Something went wrong! Post not deleted"
+                    redirect to "/posts/#{@post.id}"
+                end
             end
         end
     end
