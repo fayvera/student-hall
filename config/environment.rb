@@ -5,8 +5,7 @@ Bundler.require
 require 'sinatra/activerecord'
 require 'sinatra'
 require 'securerandom'
-require 'dotenv'
-Dotenv.load
+require 'dotenv/load'
 require_all 'app'
 
 ActiveRecord::Base.establish_connection(
